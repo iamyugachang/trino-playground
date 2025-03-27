@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d testdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    command: --setParameter diagnosticDataCollectionEnabled=false
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://root:password@localhost:27017/admin --quiet
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  trino:
+    image: trinodb/trino:428
+    container_name: trino
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./trino-conf:/etc/trino
