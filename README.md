@@ -11,6 +11,31 @@ This project is a data platform playground that demonstrates the integration of 
 - **Cross-Database Queries**: Example queries that combine data from PostgreSQL and MongoDB.
 - **Dockerized Environment**: Easy setup using Docker Compose.
 
+## Demo
+Just a brief demo that enable Trino to query across multiple database, in this exmaple using Postgres and MongoDB.
+```
+$ python trino_query_test.py 
+
+PostgreSQL Data:
+[1, 'John Doe', 'john@example.com', 'USA', datetime.date(2024, 1, 15)]
+[2, 'Jane Smith', 'jane@example.com', 'Canada', datetime.date(2024, 2, 20)]
+[3, 'Bob Johnson', 'bob@example.com', 'UK', datetime.date(2024, 3, 5)]
+[4, 'Maria Garcia', 'maria@example.com', 'Spain', datetime.date(2024, 1, 28)]
+[5, 'Ahmed Hassan', 'ahmed@example.com', 'Egypt', datetime.date(2024, 2, 14)]
+[6, 'Li Wei', 'li@example.com', 'China', datetime.date(2024, 3, 10)]
+[7, 'Anna Kowalski', 'anna@example.com', 'Poland', datetime.date(2024, 1, 5)]
+
+MongoDB Data:
+['Laptop', 1200, 'Electronics', True]
+['Headphones', 100, 'Electronics', True]
+['Coffee Maker', 80, 'Kitchen', False]
+
+Cross-Database Query:
+['John Doe', 'Laptop', 1200]
+['John Doe', 'Headphones', 100]
+['John Doe', 'Coffee Maker', 80]
+```
+
 ## Installation
 
 1. Install [Poetry](https://python-poetry.org/docs/#installation) if you don't have it already:
