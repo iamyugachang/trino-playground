@@ -36,33 +36,42 @@ Cross-Database Query:
 ['John Doe', 'Coffee Maker', 80]
 ```
 
-## Installation
+## Getting Started
 
-1. Install [Poetry](https://python-poetry.org/docs/#installation) if you don't have it already:
-   ```bash
-   curl -sSL https://install.python-poetry.org | python3 -
-   ```
+### Prerequisites
 
-2. Install the project dependencies:
-   ```bash
-   poetry install
-   ```
+- **Python 3.12+**
+- **[uv](https://github.com/astral-sh/uv)** (Python package manager)
+- **Docker** and **Docker Compose**
 
-3. Activate the virtual environment:
-   ```bash
-   eval $(poetry env info --path)/bin/activate
-   ```
+### Installation & Running
 
-## Usage
+1.  **Install Dependencies**
+    ```bash
+    uv sync
+    ```
 
-1. Access the Trino web interface at [http://localhost:8080](http://localhost:8080).
+2.  **Start Services**
+    Launch PostgreSQL, MongoDB, and Trino containers:
+    ```bash
+    docker compose up -d
+    ```
+    > **Note**: Wait a few moments for the services to initialize and become healthy.
 
-2. Run the query test script:
-   ```bash
-   python trino_query_test.py
-   ```
+3.  **Initialize Data**
+    Populate the databases with sample data:
+    ```bash
+    uv run python data_init.py
+    ```
 
-3. Modify and experiment with the provided Trino queries in `trino_query_test.py`.
+4.  **Run Trino Queries**
+    Execute the test script to perform cross-database queries:
+    ```bash
+    uv run python trino_query_test.py
+    ```
+
+5.  **Access Trino UI** (Optional)
+    Open [http://localhost:8080](http://localhost:8080) in your web browser. (username: `admin`, password: blank)
 
 ## Project Structure
 
@@ -108,8 +117,9 @@ classDiagram
 
 ## Requirements
 
-- Python 3.10 or higher
+- Python 3.12+ (managed by `uv`)
 - Docker and Docker Compose
+- `uv` package manager
 
 ## License
 
