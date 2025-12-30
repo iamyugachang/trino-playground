@@ -12,25 +12,26 @@ connection = trino.dbapi.connect(
 cursor = connection.cursor()
 
 # Query from PostgreSQL
-print("PostgreSQL Data:")
+print("PostgreSQL Data (Customers):")
 cursor.execute('SELECT * FROM postgresql.public.customers')
 rows = cursor.fetchall()
 for row in rows:
     print(row)
 
 # Query from MongoDB
-print("\nMongoDB Data:")
-cursor.execute('SELECT * FROM mongodb.testdb.products')
+print("\nMongoDB Data (Users):")
+cursor.execute('SELECT * FROM mongodb.testdb.users')
 rows = cursor.fetchall()
 for row in rows:
     print(row)
 
 # Cross-database query
-print("\nCross-Database Query:")
+print("\nCross-Database Query (Product Reviews):")
+# Joining PostgreSQL Products with MongoDB Reviews
 cursor.execute('''
-    SELECT c.name AS customer_name, p.name AS product_name, p.price 
-    FROM postgresql.public.customers c, mongodb.testdb.products p
-    WHERE c.id = 1
+    SELECT p.name AS product_name, r.rating, r.review_text 
+    FROM postgresql.public.products p
+    JOIN mongodb.testdb.reviews r ON p.id = r.product_id
 ''')
 rows = cursor.fetchall()
 for row in rows:
