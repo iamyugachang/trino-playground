@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a data platform playground that demonstrates the integration of Trino with PostgreSQL and MongoDB. It showcases how to query data from multiple sources and perform cross-database queries using Trino.
+This project is a peronal-used data playground that demonstrates the integration of Trino with PostgreSQL and MongoDB. It showcases how to query data from multiple sources and perform cross-database queries using Trino.
 
 ## Features
 
@@ -52,25 +52,29 @@ Cross-Database Query:
     ```
 
 2.  **Start Services**
+    
     Launch PostgreSQL, MongoDB, and Trino containers:
     ```bash
     docker compose up -d
     ```
     > **Note**: Wait a few moments for the services to initialize and become healthy.
 
-3.  **Initialize Data**
+3.  **Initialize Data (Ignore this if you already have own data sources)**
+    
     Populate the databases with sample data:
     ```bash
     uv run python data_init.py
     ```
 
 4.  **Run Trino Queries**
+    
     Execute the test script to perform cross-database queries:
     ```bash
     uv run python trino_query_test.py
     ```
 
 5.  **Access Trino UI** (Optional)
+    
     Open [http://localhost:8080](http://localhost:8080) in your web browser. (username: `admin`, password: blank)
 
 ## Project Structure
